@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "betterbeekeeping:oak_beehive",
+    "betterbeekeeping:dark_oak_beehive",
+    "betterbeekeeping:spruce_beehive",
+    "betterbeekeeping:acacia_beehive",
+    "betterbeekeeping:birch_beehive",
+    "betterbeekeeping:jungle_beehive"
+  ]
+}

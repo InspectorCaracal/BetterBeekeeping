@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "minecraft:block/iron_block",
+    "top": "betterbeekeeping:block/bee_smoker_top",
+    "side": "minecraft:block/iron_block"
+  }
+}

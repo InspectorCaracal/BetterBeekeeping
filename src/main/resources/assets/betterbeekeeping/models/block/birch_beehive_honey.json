@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "betterbeekeeping:block/birch_beehive_end",
+    "bottom": "betterbeekeeping:block/birch_beehive_end",
+    "side": "betterbeekeeping:block/birch_beehive_side_honey",
+    "front": "betterbeekeeping:block/birch_beehive_front_honey",
+    "particle": "betterbeekeeping:block/birch_beehive_side"
+  }
+}

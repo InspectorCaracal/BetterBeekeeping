@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterbeekeeping:oak_beehive"
+    ]
+  },
+  "criteria": {
+    "has_honeycomb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:honeycomb"
+          }
+        ]
+      }
+    },
+    "has_planks_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:oak_planks"
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "betterbeekeeping:oak_beehive"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_honeycomb",
+      "has_the_recipe"
+    ],
+    [
+      "has_planks_recipe",
+      "has_the_recipe"
+    ]
+  ]
+}

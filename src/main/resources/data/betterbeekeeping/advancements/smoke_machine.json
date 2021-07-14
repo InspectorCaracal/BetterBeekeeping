@@ -1,0 +1,40 @@
+{
+	"display": {
+		"icon": {
+			"item": "betterbeekeeping:bee_smoker_block"
+		},
+		"title": {
+			"translate": "advancements.betterbeekeeping.smoke_machine.title"
+		},
+		"description": {
+			"translate": "advancements.betterbeekeeping.smoke_machine.description"
+		},
+		"frame": "task",
+		"show_toast": false,
+		"announce_to_chat": false,
+		"hidden": false
+	},
+	"parent": "betterbeekeeping:think_honey",
+	"criteria": {
+		"pickup_smoker": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "betterbeekeeping:bee_smoker_block"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"pickup_smoker"
+		]
+	],
+	"rewards": {
+		"recipes": [
+  		"betterbeekeeping:portable_smoker"
+		]
+	}
+}

@@ -1,0 +1,60 @@
+{
+	"display": {
+		"icon": {
+			"item": "betterbeekeeping:oak_beehive"
+		},
+		"title": {
+			"translate": "advancements.betterbeekeeping.bee_friends.title"
+		},
+		"description": {
+			"translate": "advancements.betterbeekeeping.bee_friends.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "betterbeekeeping:think_honey",
+	"criteria": {
+		"get_honey": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "minecraft:honey_bottle"
+					}
+				]
+			}
+		},
+		"get_honeycomb": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "minecraft:honeycomb"
+					}
+				]
+			}
+		},
+		"target_hive": {
+			"trigger": "minecraft:item_used_on_block",
+			"conditions": {
+				"location": {
+					"block": {
+						"tag": "betterbeekeeping:crafted_hives"
+					},
+					"smokey": true
+				}
+			}
+		}
+	},
+	"requirements": [
+		[
+			"target_hive"
+		],
+		[
+			"get_honey",
+			"get_honeycomb"
+		]
+	]
+}

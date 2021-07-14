@@ -1,0 +1,36 @@
+{
+	"display": {
+		"icon": {
+			"block": "betterbeekeeping:portable_smoker"
+		},
+		"title": {
+			"translate": "advancements.betterbeekeeping.smoke_n_go.title"
+		},
+		"description": {
+			"translate": "advancements.betterbeekeeping.smoke_n_go.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "betterbeekeeping:smoke_machine",
+	"criteria": {
+		"smoke_em": {
+			"trigger": "minecraft:item_used_on_block",
+			"conditions": {
+				"location": {
+					"block": {
+						"tag": "minecraft:beehives"
+					}
+				},
+				"item": "betterbeekeeping:portable_smoker"
+			}
+		}
+	},
+	"requirements": [
+		[
+			"smoke_em"
+		]
+	]
+}

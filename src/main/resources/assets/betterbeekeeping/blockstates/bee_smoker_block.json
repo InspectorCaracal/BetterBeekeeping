@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "": [
+            { "model": "betterbeekeeping:block/bee_smoker_block" }
+        ]
+    }
+}
