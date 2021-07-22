@@ -6,10 +6,18 @@
 	"block.betterbeekeeping.acacia_beehive": "Acacia Beehive",
 	"block.betterbeekeeping.birch_beehive": "Birch Beehive",
 	"block.betterbeekeeping.jungle_beehive": "Jungle Beehive",
+	"block.betterbeekeeping.crimson_beehive": "Crimson Beehive",
+	"block.betterbeekeeping.warped_beehive": "Warped Beehive",
 	"item.betterbeekeeping.cool_honey_bottle": "Cool Honey Bottle",
 	"item.betterbeekeeping.warm_honey_bottle": "Warm Honey Bottle",
 	"item.betterbeekeeping.spicy_honey_bottle": "Spicy Honey Bottle",
 	"item.betterbeekeeping.lively_honey_bottle": "Lively Honey Bottle",
 	"item.betterbeekeeping.bright_honey_bottle": "Bright Honey Bottle",
-	"item.betterbeekeeping.strange_honey_bottle": "Strange Honey Bottle"
+	"item.betterbeekeeping.strange_honey_bottle": "Strange Honey Bottle",
+	"advancements.betterbeekeeping.think_honey.title": "Now You're Thinking With Honey",
+	"advancements.betterbeekeeping.think_honey.description": "Gather some honeycomb to make some hives.",
+	"advancements.betterbeekeeping.smoke_machine.title": "Smoke Machine",
+	"advancements.betterbeekeeping.smoke_machine.description": "Craft a Bee Smoker for your buzzy friends.",
+	"advancements.betterbeekeeping.bee_friends.title": "Let's Bee Friends",
+	"advancements.betterbeekeeping.bee_friends.description": "Visit your bees at their new home."	
 }

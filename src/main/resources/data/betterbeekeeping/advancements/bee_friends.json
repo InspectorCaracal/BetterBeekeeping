@@ -1,7 +1,7 @@
 {
 	"display": {
 		"icon": {
-			"item": "betterbeekeeping:oak_beehive"
+			"item": "minecraft:cornflower"
 		},
 		"title": {
 			"translate": "advancements.betterbeekeeping.bee_friends.title"
@@ -21,7 +21,7 @@
 			"conditions": {
 				"items": [
 					{
-						"item": "minecraft:honey_bottle"
+						"tag": "betterbeekeeping:honey_bottles"
 					}
 				]
 			}
@@ -41,7 +41,7 @@
 			"conditions": {
 				"location": {
 					"block": {
-						"tag": "betterbeekeeping:crafted_hives"
+						"tag": "betterbeekeeping:crafted_beehives"
 					},
 					"smokey": true
 				}

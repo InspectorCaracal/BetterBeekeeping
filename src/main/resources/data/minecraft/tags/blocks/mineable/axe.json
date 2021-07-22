@@ -1,6 +1,13 @@
 {
   "replace": false,
   "values": [
-    "betterbeekeeping:oak_beehive"
+    "betterbeekeeping:oak_beehive",
+    "betterbeekeeping:dark_oak_beehive",
+    "betterbeekeeping:spruce_beehive",
+    "betterbeekeeping:acacia_beehive",
+    "betterbeekeeping:jungle_beehive",
+    "betterbeekeeping:birch_beehive",
+    "betterbeekeeping:crimson_beehive",
+    "betterbeekeeping:warped_beehive"
   ]
 }

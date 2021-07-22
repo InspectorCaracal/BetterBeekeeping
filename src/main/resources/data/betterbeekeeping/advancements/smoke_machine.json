@@ -1,7 +1,7 @@
 {
 	"display": {
 		"icon": {
-			"item": "betterbeekeeping:bee_smoker_block"
+			"item": "minecraft:flint_and_steel"
 		},
 		"title": {
 			"translate": "advancements.betterbeekeeping.smoke_machine.title"
@@ -31,10 +31,5 @@
 		[
 			"pickup_smoker"
 		]
-	],
-	"rewards": {
-		"recipes": [
-  		"betterbeekeeping:portable_smoker"
-		]
-	}
+	]
 }

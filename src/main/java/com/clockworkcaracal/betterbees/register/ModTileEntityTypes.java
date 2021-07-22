@@ -14,6 +14,6 @@ public class ModTileEntityTypes {
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, BetterBeekeeping.MOD_ID);
 
     //TileEntities
-	public static final RegistryObject<TileEntityType<ModBeehiveTileEntity>> MOD_BEEHIVE = TILE_ENTITY_TYPES.register("mod_beehive", () -> TileEntityType.Builder.of(ModBeehiveTileEntity::new, ModBlocks.OAK_BEEHIVE.get(), ModBlocks.DARK_OAK_BEEHIVE.get(), ModBlocks.SPRUCE_BEEHIVE.get(), ModBlocks.ACACIA_BEEHIVE.get(), ModBlocks.BIRCH_BEEHIVE.get(), ModBlocks.JUNGLE_BEEHIVE.get()).build(null));
+	public static final RegistryObject<TileEntityType<ModBeehiveTileEntity>> MOD_BEEHIVE = TILE_ENTITY_TYPES.register("mod_beehive", () -> TileEntityType.Builder.of(ModBeehiveTileEntity::new, ModBlocks.OAK_BEEHIVE.get(), ModBlocks.DARK_OAK_BEEHIVE.get(), ModBlocks.SPRUCE_BEEHIVE.get(), ModBlocks.ACACIA_BEEHIVE.get(), ModBlocks.BIRCH_BEEHIVE.get(), ModBlocks.JUNGLE_BEEHIVE.get(), ModBlocks.CRIMSON_BEEHIVE.get(), ModBlocks.WARPED_BEEHIVE.get()).build(null));
 
 }

@@ -16,8 +16,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.BeehiveTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBeehiveTileEntity extends BeehiveTileEntity {
@@ -79,13 +77,18 @@ public class ModBeehiveTileEntity extends BeehiveTileEntity {
 		this.honeyType = null;
 
 		String saved_honey = nbt.getString("Honey");
-		this.honeyType = ForgeRegistries.ITEMS.getValue(new ResourceLocation(saved_honey));
+		if (saved_honey != "null") {
+			this.honeyType = ForgeRegistries.ITEMS.getValue(new ResourceLocation(saved_honey));
+		}
 	}
 
 	// need to save flower list
 	public CompoundNBT save(CompoundNBT nbt) {
 		super.save(nbt);
-		nbt.putString("Honey", this.honeyType.getRegistryName().toString());
+		if (this.honeyType == null) {
+			nbt.putString("Honey", "null");
+		}
+		else nbt.putString("Honey", this.honeyType.getRegistryName().toString());
 
 		return nbt;
 	}
