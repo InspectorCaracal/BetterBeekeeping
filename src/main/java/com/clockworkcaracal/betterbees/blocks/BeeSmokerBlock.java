@@ -2,54 +2,54 @@ package com.clockworkcaracal.betterbees.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BeeSmokerBlock extends Block implements IWaterLoggable {
+public class BeeSmokerBlock extends Block implements SimpleWaterloggedBlock {
    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
    public static final BooleanProperty LIT = BlockStateProperties.LIT;
    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public BeeSmokerBlock(AbstractBlock.Properties properties) {
+    public BeeSmokerBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(LIT, Boolean.valueOf(true)).setValue(WATERLOGGED, Boolean.valueOf(false)));
     }
 
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
    		if (canLight(state)) {
             worldIn.setBlock(pos, state.setValue(LIT, Boolean.valueOf(true)), 3);
     	} else if (isLit(state)) {
     		worldIn.setBlock(pos, state.setValue(LIT, Boolean.valueOf(false)), 3);
     	}
-    	return ActionResultType.SUCCESS;
+    	return InteractionResult.SUCCESS;
      }
 
    @OnlyIn(Dist.CLIENT)
-   public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+   public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
       if (stateIn.getValue(LIT)) {
          if (rand.nextInt(3) == 0) {
             for(int i = 0; i < rand.nextInt(1) + 1; ++i) {
@@ -59,13 +59,13 @@ public class BeeSmokerBlock extends Block implements IWaterLoggable {
       }
    	}
     
-    public static void makeParticles(World worldIn, BlockPos pos, boolean spawnExtraSmoke) {
+    public static void makeParticles(Level worldIn, BlockPos pos, boolean spawnExtraSmoke) {
         Random random = worldIn.getRandom();
-        BasicParticleType basicparticletype = ParticleTypes.CAMPFIRE_COSY_SMOKE;
+        SimpleParticleType basicparticletype = ParticleTypes.CAMPFIRE_COSY_SMOKE;
         worldIn.addParticle(basicparticletype, true, (double)pos.getX() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5D + random.nextDouble() / 3.0D * (double)(random.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
      }
 
-     public static boolean isSmokeyPos(World world, BlockPos pos) {
+     public static boolean isSmokeyPos(Level world, BlockPos pos) {
         for(int i = 1; i <= 5; ++i) {
            BlockPos blockpos = pos.below(i);
            BlockState blockstate = world.getBlockState(blockpos);
@@ -85,25 +85,25 @@ public class BeeSmokerBlock extends Block implements IWaterLoggable {
         return state.hasProperty(LIT) && state.is(BlockTags.CAMPFIRES) && state.getValue(LIT);
      }
 
-     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
          return SHAPE;
       }
 
-     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
          builder.add(LIT, WATERLOGGED);
       }
   
-     public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+     public boolean placeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
          if (!state.getValue(BlockStateProperties.WATERLOGGED) && fluidStateIn.getType() == Fluids.WATER) {
             boolean flag = state.getValue(LIT);
             if (flag) {
                if (!worldIn.isClientSide()) {
-                  worldIn.playSound((PlayerEntity)null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                  worldIn.playSound((Player)null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0F, 1.0F);
                }
             }
 
             worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(true)).setValue(LIT, Boolean.valueOf(false)), 3);
-            worldIn.getLiquidTicks().scheduleTick(pos, fluidStateIn.getType(), fluidStateIn.getType().getTickDelay(worldIn));
+            worldIn.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
             return true;
          } else {
             return false;

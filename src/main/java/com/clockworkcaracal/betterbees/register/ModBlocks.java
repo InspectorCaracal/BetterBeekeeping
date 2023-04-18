@@ -1,9 +1,9 @@
 package com.clockworkcaracal.betterbees.register;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -13,10 +13,8 @@ import com.clockworkcaracal.betterbees.blocks.ModBeehiveBlock;
 
 public final class ModBlocks {
 
-    //The BLOCKS deferred register in which you can register blocks.
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, BetterBeekeeping.MOD_ID);
 
-    //The BLOCKS registry items
     public static final RegistryObject<Block> BEE_SMOKER_BLOCK = BLOCKS.register("bee_smoker_block", () -> new BeeSmokerBlock(Block.Properties.of(Material.METAL).strength(3.5F).sound(SoundType.METAL)));
 
     // new Beehive blocks
