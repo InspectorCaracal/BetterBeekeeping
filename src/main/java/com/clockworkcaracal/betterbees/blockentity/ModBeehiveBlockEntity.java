@@ -7,18 +7,24 @@ import com.clockworkcaracal.betterbees.register.ModItems;
 import com.clockworkcaracal.betterbees.BetterBeekeeping;
 import com.clockworkcaracal.betterbees.register.ModBlockEntityTypes;
 
+import net.minecraft.tags.TagKey;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBeehiveBlockEntity extends BeehiveBlockEntity {
@@ -50,9 +56,7 @@ public class ModBeehiveBlockEntity extends BeehiveBlockEntity {
 	}
 	
 	public void addNectar(BlockState flower) {
-		LOGGER.debug("delicious sugary goodness");
 		if (this.honeyType != Items.HONEY_BOTTLE ) {
-			LOGGER.debug(this.honeyType);
 			Item newHoney = this.flowerToHoney(flower);
 			if (this.honeyType == null) this.honeyType = newHoney;
 			else if (this.honeyType != newHoney) this.honeyType = Items.HONEY_BOTTLE;
@@ -62,32 +66,27 @@ public class ModBeehiveBlockEntity extends BeehiveBlockEntity {
 	
 	private Item flowerToHoney(BlockState flower) {
 		if (flower.is(SPICY_FLOWERS)) { 
-			LOGGER.debug(SPICY_FLOWERS);
 			return ModItems.SPICY_HONEY_BOTTLE.get();
 		}
 		if (flower.is(WARM_FLOWERS)) {
-			LOGGER.debug(WARM_FLOWERS);
 			return ModItems.WARM_HONEY_BOTTLE.get();
 		}
 		if (flower.is(BRIGHT_FLOWERS)) {
-			LOGGER.debug(BRIGHT_FLOWERS);
 			return ModItems.BRIGHT_HONEY_BOTTLE.get();
 		}
 		if (flower.is(LIVELY_FLOWERS)) {
-			LOGGER.debug(LIVELY_FLOWERS);
 			return ModItems.LIVELY_HONEY_BOTTLE.get();
 		}
 		if (flower.is(COOL_FLOWERS)) {
-			LOGGER.debug(COOL_FLOWERS);
 			return ModItems.COOL_HONEY_BOTTLE.get();
 		}
 		if (flower.is(STRANGE_FLOWERS)) {
-			LOGGER.debug(STRANGE_FLOWERS);
 			return ModItems.STRANGE_HONEY_BOTTLE.get();
 		}
 		
 		return Items.HONEY_BOTTLE;
 	}
+	
 	
 	// need to load flower list
 	public void load(CompoundTag nbt) {
@@ -106,7 +105,7 @@ public class ModBeehiveBlockEntity extends BeehiveBlockEntity {
 		if (this.honeyType == null) {
 			nbt.putString("Honey", "null");
 		}
-		else nbt.putString("Honey", this.honeyType.getRegistryName().toString());
+		else nbt.putString("Honey", ForgeRegistries.ITEMS.getKey(this.honeyType).toString());
 	}
 
 }

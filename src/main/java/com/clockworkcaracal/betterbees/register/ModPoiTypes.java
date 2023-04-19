@@ -21,22 +21,19 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 
+
 public final class ModPoiTypes {
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	// override the minecraft registry to include all of the hives in one PoiType so we can overwrite PoiType.BEEHIVE
-    public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, "minecraft");
+    public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, BetterBeekeeping.MOD_ID);
 
-    public static final RegistryObject<PoiType> BEEHIVE = POI_TYPES.register("beehive", () -> getHivePoiType());
-
-    private static PoiType getHivePoiType() {
-		return new PoiType("beehive", getPoiHiveStates(), 0, 1);
-    }
+    public static final RegistryObject<PoiType> BEEHIVE = POI_TYPES.register("mod_beehive", () -> new PoiType(getPoiHiveStates(), 0, 1));
 
     private static Set<BlockState> getPoiHiveStates() {
-    	final Set<BlockState> HIVES = Set.of(Blocks.BEEHIVE, ModBlocks.OAK_BEEHIVE.get(), ModBlocks.DARK_OAK_BEEHIVE.get(), ModBlocks.SPRUCE_BEEHIVE.get(), ModBlocks.ACACIA_BEEHIVE.get(), ModBlocks.BIRCH_BEEHIVE.get(), ModBlocks.JUNGLE_BEEHIVE.get()).stream().flatMap((block) -> {
+    	final Set<BlockState> HIVES = Set.of(ModBlocks.OAK_BEEHIVE.get(), ModBlocks.MANGROVE_BEEHIVE.get(), ModBlocks.DARK_OAK_BEEHIVE.get(), ModBlocks.SPRUCE_BEEHIVE.get(), ModBlocks.ACACIA_BEEHIVE.get(), ModBlocks.BIRCH_BEEHIVE.get(), ModBlocks.JUNGLE_BEEHIVE.get()).stream().flatMap((block) -> {
 		      return block.getStateDefinition().getPossibleStates().stream();
 		   }).collect(ImmutableSet.toImmutableSet());
+//    	LOGGER.debug(HIVES);
     	return HIVES;
     }
 }

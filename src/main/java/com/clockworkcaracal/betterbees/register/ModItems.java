@@ -35,6 +35,7 @@ public final class ModItems {
     public static final RegistryObject<Item> JUNGLE_BEEHIVE_ITEM = ITEMS.register("jungle_beehive", () -> new BlockItem(ModBlocks.JUNGLE_BEEHIVE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
     public static final RegistryObject<Item> CRIMSON_BEEHIVE_ITEM = ITEMS.register("crimson_beehive", () -> new BlockItem(ModBlocks.CRIMSON_BEEHIVE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
     public static final RegistryObject<Item> WARPED_BEEHIVE_ITEM = ITEMS.register("warped_beehive", () -> new BlockItem(ModBlocks.WARPED_BEEHIVE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> MANGROVE_BEEHIVE_ITEM = ITEMS.register("mangrove_beehive", () -> new BlockItem(ModBlocks.MANGROVE_BEEHIVE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
 
 }

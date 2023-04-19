@@ -10,8 +10,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlockEntityTypes {
 
-	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, BetterBeekeeping.MOD_ID);
+    //The TILE_ENTITIES deferred register in which you can register tile entities.
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, BetterBeekeeping.MOD_ID);
 
+    //TileEntities
 	public static final RegistryObject<BlockEntityType<ModBeehiveBlockEntity>> MOD_BEEHIVE = BLOCK_ENTITY_TYPES.register("mod_beehive", () -> BlockEntityType.Builder.of(ModBeehiveBlockEntity::new, ModBlocks.OAK_BEEHIVE.get(), ModBlocks.DARK_OAK_BEEHIVE.get(), ModBlocks.SPRUCE_BEEHIVE.get(), ModBlocks.ACACIA_BEEHIVE.get(), ModBlocks.BIRCH_BEEHIVE.get(), ModBlocks.JUNGLE_BEEHIVE.get(), ModBlocks.CRIMSON_BEEHIVE.get(), ModBlocks.WARPED_BEEHIVE.get()).build(null));
 
 }

@@ -7,17 +7,17 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.TallFlowerBlock;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.util.thread.BlockableEventLoop;
 import net.minecraft.server.TickTask;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.EntityLeaveWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.common.util.LogicalSidedProvider;
@@ -33,19 +33,21 @@ public class ModEvents {
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	@SubscribeEvent
-	public static void beeSpawn(EntityJoinWorldEvent event) {
+	public static void beeSpawn(EntityJoinLevelEvent event) {
 		if (BetterBeeConfig.BEE_HIBERNATION.get()) {
-			Level world = event.getWorld();
+			Level world = event.getLevel();
 			if (!world.isClientSide() && event.getEntity() instanceof Bee) {
 				Bee bee = (Bee)event.getEntity();
 				if (bee.hasHive()) {
 					BlockPos hive_pos = bee.getHivePos();
 					if (world.getChunkSource().getChunkNow(hive_pos.getX() >> 4, hive_pos.getY() >> 4) != null) {
-						if (world.getBiome(hive_pos).value().coldEnoughToSnow(hive_pos)) {
-							// since it's only the server this is sorta redundant but i like redundancy
-							BlockableEventLoop<? super TickTask> executor = LogicalSidedProvider.WORKQUEUE.get(world.isClientSide ? LogicalSide.CLIENT : LogicalSide.SERVER);
-							executor.tell(new TickTask(0, () -> beeHibernation(hive_pos, bee, world, event)));
+							if (world.getBiome(hive_pos).value().coldEnoughToSnow(hive_pos)) {
+								
+								// since it's only the server this is sorta redundant but i like redundancy
+								BlockableEventLoop<? super TickTask> executor = LogicalSidedProvider.WORKQUEUE.get(world.isClientSide ? LogicalSide.CLIENT : LogicalSide.SERVER);
+								executor.tell(new TickTask(0, () -> beeHibernation(hive_pos, bee, world, event)));
 						}
+						
 					}
 				}
 			}
@@ -54,7 +56,7 @@ public class ModEvents {
 		}
 	}
 	
-	private static void beeHibernation(BlockPos hive_pos, Bee bee, Level world, EntityJoinWorldEvent event) {
+	private static void beeHibernation(BlockPos hive_pos, Bee bee, Level world, EntityJoinLevelEvent event) {
 		Block hive_block =  world.getBlockState(hive_pos).getBlock();
 		if (hive_block instanceof BeehiveBlock) {
 			BeehiveBlockEntity hiveEntity = (BeehiveBlockEntity)world.getBlockEntity(hive_pos);
@@ -66,9 +68,9 @@ public class ModEvents {
 	}
 	
 	@SubscribeEvent
-	public static void depositHoney(EntityLeaveWorldEvent event) {
+	public static void depositHoney(EntityLeaveLevelEvent event) {
 		if (BetterBeeConfig.FLAVORED_HONEY.get()) {
-			Level world = event.getWorld();
+			Level world = event.getLevel();
 			if (!world.isClientSide() && event.getEntity() instanceof Bee) {
 				Bee bee = (Bee)event.getEntity();
 				if (bee.hasHive() && bee.getSavedFlowerPos() != null) {

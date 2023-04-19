@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "PHP",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:mangrove_planks"
+    },
+    "H": {
+      "item": "minecraft:beehive"
+    }
+  },
+  "result": {
+    "item": "betterbeekeeping:mangrove_beehive"
+  }
+}

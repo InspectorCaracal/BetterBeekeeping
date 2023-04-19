@@ -34,6 +34,7 @@ public class ModBeehiveBlock extends BeehiveBlock {
 		super(properties);
 	}
 
+//	@Override
 	@Nullable
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new ModBeehiveBlockEntity(pos, state);

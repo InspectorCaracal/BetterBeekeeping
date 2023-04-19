@@ -26,5 +26,6 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ACACIA_BEEHIVE = BLOCKS.register("acacia_beehive", () -> new ModBeehiveBlock(Block.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> CRIMSON_BEEHIVE = BLOCKS.register("crimson_beehive", () -> new ModBeehiveBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> WARPED_BEEHIVE = BLOCKS.register("warped_beehive", () -> new ModBeehiveBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> MANGROVE_BEEHIVE = BLOCKS.register("mangrove_beehive", () -> new ModBeehiveBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
 
 }
